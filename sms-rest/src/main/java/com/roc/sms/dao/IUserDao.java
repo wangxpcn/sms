@@ -5,7 +5,7 @@ import java.util.List;
 import com.roc.sms.bean.User;
 
 public interface IUserDao {
-	List<User> findAll();
+	List<User> find(String userName);
 
     int add(User user);
 

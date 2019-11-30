@@ -16,8 +16,13 @@ public class UserDaoImpl implements IUserDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public List<User> findAll() {
-		String sql = "select * from roc_rabbit";
+	public List<User> find(String userName) {
+		String sql = null;
+		if (userName == null) {
+			sql = "select * from roc_rabbit";
+		} else {
+			sql = "select * from roc_rabbit WHERE name=\"" + userName + "\"";
+		}
 		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class));
 	}
 

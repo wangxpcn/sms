@@ -15,8 +15,8 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 	
 	@Override
-	public List<User> findAll() {
-		return userDao.findAll();
+	public List<User> find(String userName) {
+		return userDao.find(userName);
 	}
 
 	@Override

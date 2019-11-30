@@ -33,8 +33,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public List<User> find(@RequestParam(value = "userName", required = true) String userName) {
-		List<User> us=userService.findAll();
+	public List<User> find(@RequestParam(value = "userName", required = false) String userName) {
+		List<User> us=userService.find(userName);
 		return us;
 	}
 }
