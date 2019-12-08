@@ -17,8 +17,7 @@ public class UserController {
 	@Autowired
     private IUserService userService;
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public int add(@RequestBody User user) {
-		
+	public int add(@RequestBody User user) {		
 		return userService.add(user);
 	}
 
@@ -34,7 +33,7 @@ public class UserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public List<User> find(@RequestParam(value = "userName", required = false) String userName) {
-		List<User> us=userService.find(userName);
+		List<User> us = userService.find(userName);
 		return us;
 	}
 }
