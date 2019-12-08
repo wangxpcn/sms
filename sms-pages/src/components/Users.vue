@@ -1,24 +1,25 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <el-table
-      :data="tableData"
+  <div class="users">
+    <div class='addBtn'>
+      <el-button type="primary" @click="add()">添加</el-button>
+    </div>
+     <el-table
+      :data="users"
       style="width: 100%">
       <el-table-column
         prop="name"
         label="姓名"
         width="180">
       </el-table-column>
-       <el-table-column
+      <el-table-column
         prop="age"
         label="年龄"
         width="180">
       </el-table-column>
-
       <el-table-column
         prop="sex"
         label="性别"
-         width="180">
+        width="180">
       </el-table-column>
       <el-table-column
         prop="interesting"
@@ -32,19 +33,23 @@
 <script>
 import api from '@/apis/api'
 export default {
-  name: 'UserList',
+  name: 'Users',
+  props: {
+  },
   data () {
     return {
-      msg: 'User list',
-      tableData: []
+      users: []
     }
   },
   methods: {
+    add () {
+      this.$router.push('/users/createUser')
+    },
     fetchAll () {
-      api.user.getUsers('/user').then((res) => {
+      api.common.get('/user').then((res) => {
         // eslint-disable-next-line
         console.log(res.data)
-        this.tableData = res.data
+        this.users = res.data
       })
     }
   },
@@ -55,20 +60,13 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
+<style>
+.users {
+  margin: 20px auto;
+  width: 70%;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.users .addBtn{
+    text-align: right;
+    margin-bottom: 20px;
 }
 </style>

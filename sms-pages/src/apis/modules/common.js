@@ -1,29 +1,29 @@
 import axios from '@/utils/axios'
 
-export const getUsers = (url) => {
+export const get = (url) => {
   return axios({
     url: url,
     method: 'get'
   })
 }
-export const addUser = (url, data) => {
+export const add = (url, data) => {
   return axios({
     url: url,
     method: 'post',
     data: data
   })
 }
-export const modifyUser = (url, data) => {
+export const modify = (url, data) => {
   return axios({
     url: url,
-    method: 'post',
+    method: 'put',
     data: data
   })
 }
-export const deleteUser = (url, data) => {
+export const deletes = (url, param) => {
   return axios({
     url: url,
-    method: 'post',
-    data: data
+    method: 'delete',
+    params: param
   })
 }

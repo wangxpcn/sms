@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import UserList from '@/components/UserList'
+import Microblog from '@/components/Microblog'
+import Users from '@/components/Users'
+import CreateUser from '@/components/user/CreateUser'
 
 Vue.use(Router)
 
@@ -9,13 +10,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Microblog',
+      component: Microblog
     },
     {
-      path: '/user_list',
-      name: 'UserList',
-      component: UserList
+      path: '/microNote',
+      name: 'Microblog',
+      component: Microblog
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users
+    },
+    {
+      path: '/users/createUser',
+      name: 'CreateUser',
+      component: CreateUser
     }
   ]
 })

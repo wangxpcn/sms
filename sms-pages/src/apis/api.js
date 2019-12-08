@@ -1,5 +1,5 @@
-import * as user from '@/apis/modules/user'
+import * as common from '@/apis/modules/common'
 
 export default {
-  user
+  common
 }
