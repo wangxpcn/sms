@@ -1,9 +1,10 @@
 import axios from '@/utils/axios'
 
-export const get = (url) => {
+export const get = (url, param) => {
   return axios({
     url: url,
-    method: 'get'
+    method: 'get',
+    params: param
   })
 }
 export const add = (url, data) => {

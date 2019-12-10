@@ -1,7 +1,7 @@
 <template>
   <div class="microblog">
     <div class="header">
-      <router-link class="profile" :to="{path: '/users'}">{{user}}</router-link>
+      <router-link class="profile" :to="{path: '/users'}">{{userName}}</router-link>
     </div>
     <table width='100%'>
       <tr>
@@ -87,7 +87,8 @@ export default {
   },
   data () {
     return {
-      user: '',
+      userId: 0,
+      userName: '',
       areaStyle: "width:100%; height:100%; border:solid 0 #ccc; resize:none; border-radius: 10px;background: #f8f6f2; outline: none; font-family:'Avenir', Helvetica, Arial, sans-serif; font-size:14px;",
       blogs: [],
       searchTableData: [],
@@ -116,13 +117,15 @@ export default {
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      vm.user = to.query.name
+      vm.userId = to.query.id
+      vm.userName = to.query.name
     })
   },
   methods: {
     add () {
       if (this.value) {
         let item = {
+          'userId': this.userId,
           'message': this.value,
           'edit': false,
           'dialogVisible': false,
@@ -158,7 +161,10 @@ export default {
       })
     },
     fetchAll (scroll) {
-      api.common.get('/microNote').then((res) => {
+      let param = {
+        'userId': this.userId
+      }
+      api.common.get('/microNote', param).then((res) => {
         this.blogs = res.data
         if (scroll) {
           this.$nextTick(() => {
@@ -215,6 +221,9 @@ export default {
     }
   },
   watch: {
+    userId: function (val) {
+      this.fetchAll()
+    },
     value: function (val) {
       this.used = val.length
       if (this.used > 1000) {
@@ -246,7 +255,9 @@ export default {
     }
   },
   mounted () {
-    this.fetchAll()
+    if (this.userId) {
+      this.fetchAll()
+    }
   },
   computed: {
     tableData: function () {
