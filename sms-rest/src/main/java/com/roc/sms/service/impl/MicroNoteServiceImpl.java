@@ -15,8 +15,8 @@ public class MicroNoteServiceImpl implements IMicroNoteService{
 	private IMicroNoteDao microNoteDao;
 	
 	@Override
-	public List<MicroNote> find(Integer id) {
-		return microNoteDao.find(id);
+	public List<MicroNote> find(Integer userId) {
+		return microNoteDao.find(userId);
 	}
 
 	@Override

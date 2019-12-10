@@ -12,7 +12,7 @@
         label="姓名"
         width="180">
         <template slot-scope='scope'>
-          <router-link :to="{path: '/microNote', query: {name: scope.row.name}}">{{scope.row.name}}</router-link>
+          <router-link :to="{path: '/microNote', query: {id: scope.row.id, name: scope.row.name}}">{{scope.row.name}}</router-link>
         </template>
       </el-table-column>
       <el-table-column

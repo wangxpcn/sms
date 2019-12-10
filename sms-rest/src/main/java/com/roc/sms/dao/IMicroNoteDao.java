@@ -4,7 +4,7 @@ import java.util.List;
 import com.roc.sms.bean.MicroNote;
 
 public interface IMicroNoteDao {
-	List<MicroNote> find(Integer id);
+	List<MicroNote> find(Integer userId);
 
     int add(MicroNote microNote);
 

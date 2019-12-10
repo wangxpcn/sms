@@ -1,5 +1,6 @@
 package com.roc.sms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,11 @@ public class MicroNoteController {
 	}
 
 	@RequestMapping(value = "/microNote", method = RequestMethod.GET)
-	public List<MicroNote> find(@RequestParam(value = "id", required = false) Integer id) {
-		List<MicroNote> mic = microNoteService.find(id);
+	public List<MicroNote> find(@RequestParam(value = "userId", required = false) Integer userId) {
+		if (userId == null) {
+			return new ArrayList<>();
+		}
+		List<MicroNote> mic = microNoteService.find(userId);
 		return mic;
 		 
 	}
