@@ -1,5 +1,8 @@
 <template>
   <div class="microblog">
+    <div class="header">
+      <router-link class="profile" :to="{path: '/users'}">{{user}}</router-link>
+    </div>
     <table width='100%'>
       <tr>
         <th class="input">
@@ -84,6 +87,7 @@ export default {
   },
   data () {
     return {
+      user: '',
       areaStyle: "width:100%; height:100%; border:solid 0 #ccc; resize:none; border-radius: 10px;background: #f8f6f2; outline: none; font-family:'Avenir', Helvetica, Arial, sans-serif; font-size:14px;",
       blogs: [],
       searchTableData: [],
@@ -109,6 +113,11 @@ export default {
       fontSize: '16px',
       activeName: 'main'
     }
+  },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.user = to.query.name
+    })
   },
   methods: {
     add () {
@@ -241,8 +250,8 @@ export default {
   },
   computed: {
     tableData: function () {
-      // eslint-disable-next-line
-      return this.searchTableData//.reverse()
+      let data = this.searchTableData
+      return data.reverse()
     }
   }
 }
@@ -251,6 +260,7 @@ export default {
 <style>
 .microblog {
   margin: 0 auto;
+  margin-top: 60px;
   width: 80%;
   font-weight: 500;
   font-size: 14px;
@@ -329,5 +339,29 @@ export default {
 }
 .el-message-box {
   width: 60%;
+}
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:60px;
+  background: #5298da;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
+  text-align: right;
+}
+.profile{
+  margin-right: 100px;
+  color: #fff;
+  font-size: 36px;
+  margin-top: 10px;
+  display: inline-block;
+}
+a {
+  text-decoration: none;
+}
+.router-link-active {
+  text-decoration: none;
 }
 </style>

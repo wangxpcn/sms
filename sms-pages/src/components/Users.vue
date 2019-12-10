@@ -5,11 +5,15 @@
     </div>
      <el-table
       :data="users"
+      border
       style="width: 100%">
       <el-table-column
         prop="name"
         label="姓名"
         width="180">
+        <template slot-scope='scope'>
+          <router-link :to="{path: '/microNote', query: {name: scope.row.name}}">{{scope.row.name}}</router-link>
+        </template>
       </el-table-column>
       <el-table-column
         prop="age"
@@ -23,8 +27,15 @@
       </el-table-column>
       <el-table-column
         prop="interesting"
-        label="兴趣"
-        width="180">
+        label="兴趣">
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="操作">
+        <template slot-scope='scope'>
+          <el-button type="text" @click="edit(scope.row)">修改</el-button>
+          <el-button type="text" @click="del(scope.row.id)">删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -45,10 +56,30 @@ export default {
     add () {
       this.$router.push('/users/createUser')
     },
+    edit (row) {
+      this.$router.push({
+        path: '/users/modifyUser',
+        query: {
+          row: row
+        }
+      })
+    },
+    del (id) {
+      this.$confirm('确认删除吗?', '提示', {
+        type: 'warning'
+      })
+        .then(() => {
+          let item = {
+            'id': id
+          }
+          api.common.deletes('/user', item).then(() => {
+            this.fetchAll()
+          })
+        })
+        .catch(() => {})
+    },
     fetchAll () {
       api.common.get('/user').then((res) => {
-        // eslint-disable-next-line
-        console.log(res.data)
         this.users = res.data
       })
     }
@@ -68,5 +99,11 @@ export default {
 .users .addBtn{
     text-align: right;
     margin-bottom: 20px;
+}
+a {
+  text-decoration: none;
+}
+.router-link-active {
+  text-decoration: none;
 }
 </style>

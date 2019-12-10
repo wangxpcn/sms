@@ -1,5 +1,8 @@
 <template>
   <div class="add-user">
+    <div class='opr'>
+      <h1>创建用户</h1>
+    </div>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="姓名">
         <el-input v-model="form.name"></el-input>
@@ -51,8 +54,5 @@ export default {
 .add-user {
   margin: 20px auto;
   width: 30%;
-}
-.add-user .el-form-item__label{
-  color: #fff;
 }
 </style>

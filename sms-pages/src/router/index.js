@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Microblog from '@/components/Microblog'
 import Users from '@/components/Users'
 import CreateUser from '@/components/user/CreateUser'
+import ModifyUser from '@/components/user/ModifyUser'
 
 Vue.use(Router)
 
@@ -10,8 +11,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Microblog',
-      component: Microblog
+      redirect: '/users'
     },
     {
       path: '/microNote',
@@ -27,6 +27,11 @@ export default new Router({
       path: '/users/createUser',
       name: 'CreateUser',
       component: CreateUser
+    },
+    {
+      path: '/users/modifyUser',
+      name: 'ModifyUser',
+      component: ModifyUser
     }
   ]
 })
